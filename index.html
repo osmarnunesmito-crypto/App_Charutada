@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#176b36">
+<title>🌿 Charutos de Couve — Planejamento e Custos</title>
+<style>
+:root{
+  --verde-900:#0b3319;--verde-800:#12502a;--verde-700:#176b36;--verde-600:#1f8a45;
+  --verde-500:#27a355;--verde-400:#4dbf78;--verde-300:#8ed9a9;--verde-200:#c3ecd2;
+  --verde-100:#e4f7ea;--verde-50:#f3fbf6;
+  --branco:#fff;--cinza-900:#1c2621;--cinza-700:#41504a;--cinza-500:#6b7a73;
+  --cinza-300:#c9d4ce;--cinza-200:#e2e9e5;--cinza-100:#f2f5f3;
+  --amarelo:#b45309;--amarelo-bg:#fef3c7;--vermelho:#c62828;--vermelho-bg:#fee2e2;
+  --azul:#1d4ed8;--azul-bg:#dbeafe;
+  --sombra-sm:0 1px 3px rgba(11,51,25,.08);--sombra:0 4px 16px rgba(11,51,25,.10);
+  --sombra-lg:0 18px 50px rgba(11,51,25,.25);--raio:14px;--raio-sm:9px;--trans:.18s ease;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--verde-50);color:var(--cinza-900);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:inherit}
+table{border-collapse:collapse;width:100%}
+.app-shell{display:flex;min-height:100vh}
+.sidebar{width:252px;flex:0 0 252px;background:linear-gradient(180deg,var(--verde-800) 0%,var(--verde-900) 100%);
+  color:#fff;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{padding:22px 20px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.12)}
+.brand .logo{font-size:26px;background:rgba(255,255,255,.14);width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex:none}
+.brand h1{font-size:16px;line-height:1.2}
+.brand small{display:block;font-size:11px;opacity:.72;font-weight:500}
+.nav{display:flex;flex-direction:column;gap:3px;padding:14px 12px;flex:1}
+.nav-item{display:flex;align-items:center;gap:11px;background:transparent;border:0;color:rgba(255,255,255,.85);
+  padding:11px 13px;border-radius:10px;text-align:left;font-weight:600;font-size:14px;transition:var(--trans);width:100%}
+.nav-item .ico{font-size:17px;width:22px;text-align:center;flex:none}
+.nav-item:hover{background:rgba(255,255,255,.10);color:#fff}
+.nav-item.active{background:var(--verde-500);color:#fff;box-shadow:0 3px 12px rgba(0,0,0,.20)}
+.sidebar-foot{padding:12px 16px 18px;font-size:11px;opacity:.55;line-height:1.45}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{background:var(--branco);border-bottom:1px solid var(--cinza-200);padding:12px 22px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:sticky;top:0;z-index:40;box-shadow:var(--sombra-sm)}
+.topbar h2{font-size:19px;display:flex;align-items:center;gap:9px}
+.topbar .spacer{flex:1}
+.seletor-evento{display:flex;align-items:center;gap:8px;background:var(--verde-50);border:1px solid var(--verde-200);border-radius:10px;padding:5px 10px}
+.seletor-evento label{font-size:12px;font-weight:700;color:var(--verde-800);white-space:nowrap}
+.seletor-evento select{border:0;background:transparent;font-weight:600;color:var(--verde-900);max-width:230px;outline:none;font-size:14px}
+.content{padding:22px;flex:1}
+.view{display:none;animation:fade .22s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--branco);border:1px solid var(--cinza-200);border-radius:var(--raio);padding:18px;box-shadow:var(--sombra-sm);margin-bottom:18px}
+.card-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.card-head h3{font-size:16px;display:flex;align-items:center;gap:8px}
+.card-head .spacer{flex:1}
+.card-sub{font-size:12.5px;color:var(--cinza-500);margin-top:2px;font-weight:500}
+.section-title{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--verde-700);font-weight:800;margin:26px 0 12px;display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid transparent;border-radius:10px;
+  padding:9px 15px;font-weight:700;font-size:13.5px;transition:var(--trans);white-space:nowrap;line-height:1.2}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--verde-600);color:#fff;box-shadow:0 2px 8px rgba(31,138,69,.30)}
+.btn.primary:hover{background:var(--verde-700)}
+.btn.ghost{background:var(--branco);color:var(--cinza-700);border-color:var(--cinza-300)}
+.btn.ghost:hover{background:var(--cinza-100);border-color:var(--cinza-500)}
+.btn.soft{background:var(--verde-100);color:var(--verde-800);border-color:var(--verde-200)}
+.btn.soft:hover{background:var(--verde-200)}
+.btn.danger{background:var(--vermelho);color:#fff}
+.btn.danger:hover{filter:brightness(.92)}
+.btn.danger-soft{background:var(--vermelho-bg);color:var(--vermelho);border-color:#f5c2c2}
+.btn.danger-soft:hover{background:#fbd5d5}
+.btn.sm{padding:6px 11px;font-size:12.5px;border-radius:8px}
+.btn.block{width:100%}
+.icon-btn{background:transparent;border:0;font-size:16px;padding:6px 9px;border-radius:8px;color:var(--cinza-500);transition:var(--trans)}
+.icon-btn:hover{background:var(--cinza-100);color:var(--cinza-900)}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
+.field label{font-size:12.5px;font-weight:700;color:var(--cinza-700)}
+.field .hint{font-size:11.5px;color:var(--cinza-500);font-weight:500}
+input[type=text],input[type=number],input[type=date],input[type=search],select,textarea{
+  width:100%;padding:9px 11px;border:1.5px solid var(--cinza-300);border-radius:var(--raio-sm);
+  background:var(--branco);color:var(--cinza-900);transition:var(--trans);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--verde-500);box-shadow:0 0 0 3px var(--verde-100)}
+textarea{resize:vertical;min-height:60px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:0 16px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:13px;margin-bottom:18px}
+.kpi{background:var(--branco);border:1px solid var(--cinza-200);border-radius:var(--raio);padding:14px 15px;
+  box-shadow:var(--sombra-sm);border-left:4px solid var(--verde-500)}
+.kpi .k-ico{font-size:19px;margin-bottom:6px;display:block;opacity:.95}
+.kpi .k-val{font-size:23px;font-weight:800;color:var(--verde-900);line-height:1.15;letter-spacing:-.02em}
+.kpi .k-lbl{font-size:11.5px;font-weight:700;color:var(--cinza-500);text-transform:uppercase;letter-spacing:.04em;margin-top:3px}
+.kpi .k-sub{font-size:11.5px;color:var(--cinza-500);margin-top:4px;font-weight:500}
+.kpi.warn{border-left-color:var(--amarelo)}
+.kpi.bad{border-left-color:var(--vermelho)}
+.kpi.money{border-left-color:var(--azul)}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--raio-sm);border:1px solid var(--cinza-200)}
+table.tbl{min-width:560px;font-size:13.5px;background:var(--branco)}
+table.tbl thead th{background:var(--verde-100);color:var(--verde-900);font-size:11.5px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;text-align:left;border-bottom:1.5px solid var(--verde-200);white-space:nowrap}
+table.tbl tbody td{padding:9px 12px;border-bottom:1px solid var(--cinza-200);vertical-align:middle}
+table.tbl tbody tr:last-child td{border-bottom:0}
+table.tbl tbody tr:hover{background:var(--verde-50)}
+table.tbl tfoot td{padding:10px 12px;font-weight:800;background:var(--verde-50);border-top:2px solid var(--verde-300);color:var(--verde-900)}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.center{text-align:center}
+.mono{font-variant-numeric:tabular-nums}
+.mini-input{width:110px;padding:6px 9px;font-size:13px;border-radius:7px;text-align:right;border:1.5px solid var(--cinza-300)}
+.mini-input:focus{border-color:var(--verde-500);box-shadow:0 0 0 3px var(--verde-100);outline:none}
+.mini-input.qtd{width:90px}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em}
+.badge.verde{background:var(--verde-100);color:var(--verde-800)}
+.badge.amarelo{background:var(--amarelo-bg);color:var(--amarelo)}
+.badge.vermelho{background:var(--vermelho-bg);color:var(--vermelho)}
+.badge.azul{background:var(--azul-bg);color:var(--azul)}
+.badge.cinza{background:var(--cinza-100);color:var(--cinza-700)}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:12px 15px;border-radius:var(--raio-sm);
+  font-size:13.5px;font-weight:600;margin-bottom:14px;border:1px solid transparent}
+.alert .ai{font-size:17px;line-height:1.2;flex:none}
+.alert.info{background:var(--azul-bg);color:#1e3a8a;border-color:#bfdbfe}
+.alert.ok{background:var(--verde-100);color:var(--verde-800);border-color:var(--verde-200)}
+.alert.warn{background:var(--amarelo-bg);color:var(--amarelo);border-color:#fcd34d}
+.alert.err{background:var(--vermelho-bg);color:var(--vermelho);border-color:#fca5a5}
+.empty{text-align:center;padding:46px 20px;color:var(--cinza-500)}
+.empty .e-ico{font-size:44px;display:block;margin-bottom:12px;opacity:.65}
+.empty h3{color:var(--cinza-700);margin-bottom:6px;font-size:17px}
+.empty p{margin:0 0 16px;font-size:13.5px;max-width:420px;margin-inline:auto}
+.event-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:15px}
+.event-card{background:var(--branco);border:1px solid var(--cinza-200);border-radius:var(--raio);padding:16px;
+  box-shadow:var(--sombra-sm);transition:var(--trans);display:flex;flex-direction:column;gap:11px;border-top:4px solid var(--verde-500)}
+.event-card:hover{box-shadow:var(--sombra);transform:translateY(-2px)}
+.event-card h4{font-size:15.5px;line-height:1.3;word-break:break-word}
+.event-card .meta{font-size:12.5px;color:var(--cinza-500);display:flex;flex-wrap:wrap;gap:4px 14px;font-weight:600}
+.event-card .mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12.5px}
+.event-card .mini-stats div{background:var(--verde-50);border-radius:8px;padding:7px 9px}
+.event-card .mini-stats b{display:block;font-size:14.5px;color:var(--verde-900)}
+.event-card .mini-stats span{font-size:10.5px;color:var(--cinza-500);text-transform:uppercase;font-weight:700;letter-spacing:.03em}
+.event-card .acts{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
+.chart-box{background:var(--branco);border:1px solid var(--cinza-200);border-radius:var(--raio);padding:16px;box-shadow:var(--sombra-sm);margin-bottom:18px}
+.chart-box h3{font-size:14.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+canvas.chart{width:100%;height:250px;display:block}
+.chart-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;font-weight:700;color:var(--cinza-700);margin-top:10px}
+.chart-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:-1px}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;align-items:end}
+.filters .field{margin-bottom:0}
+.check-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:9px;max-height:280px;overflow-y:auto;padding:3px}
+.check-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1.5px solid var(--cinza-200);
+  border-radius:10px;cursor:pointer;transition:var(--trans);background:var(--branco)}
+.check-item:hover{border-color:var(--verde-400);background:var(--verde-50)}
+.check-item input{width:18px;height:18px;accent-color:var(--verde-600);flex:none}
+.check-item .ci-txt{font-size:13px;font-weight:600;line-height:1.3}
+.check-item .ci-txt small{display:block;font-weight:500;color:var(--cinza-500);font-size:11.5px}
+#modal-root{position:fixed;inset:0;z-index:100;display:none}
+#modal-root.open{display:block}
+.modal-backdrop{position:absolute;inset:0;background:rgba(11,51,25,.55);backdrop-filter:blur(3px);
+  display:flex;align-items:flex-start;justify-content:center;padding:24px 14px;overflow-y:auto}
+.modal{background:var(--branco);border-radius:18px;width:100%;max-width:680px;box-shadow:var(--sombra-lg);
+  animation:pop .22s cubic-bezier(.2,.9,.3,1.2);margin:auto}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.modal-head{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--cinza-200)}
+.modal-head h3{font-size:17px;flex:1}
+.modal-body{padding:20px;max-height:calc(100vh - 220px);overflow-y:auto}
+.modal-foot{display:flex;justify-content:flex-end;gap:10px;padding:15px 20px;border-top:1px solid var(--cinza-200);
+  background:var(--cinza-100);border-radius:0 0 18px 18px;flex-wrap:wrap}
+#confirm-root{position:fixed;inset:0;z-index:200;display:none}
+#confirm-root.open{display:block}
+#confirm-root .modal-backdrop{align-items:center}
+#confirm-root .modal{max-width:440px}
+#toasts{position:fixed;right:18px;bottom:18px;z-index:300;display:flex;flex-direction:column;gap:10px;max-width:min(94vw,380px)}
+.toast{background:var(--branco);border-left:5px solid var(--verde-500);border-radius:11px;padding:12px 15px;
+  box-shadow:var(--sombra);font-size:13.5px;font-weight:600;display:flex;gap:10px;align-items:flex-start;animation:slideIn .25s ease}
+@keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+.toast.warn{border-left-color:var(--amarelo)}
+.toast.err{border-left-color:var(--vermelho)}
+.toast.info{border-left-color:var(--azul)}
+.toast .ti{font-size:17px;line-height:1.2}
+.preview-box{background:var(--verde-50);border:1.5px dashed var(--verde-300);border-radius:var(--raio);padding:14px;margin-top:6px}
+.preview-box h4{font-size:13px;color:var(--verde-800);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em}
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px}
+.preview-grid div{background:var(--branco);border-radius:9px;padding:9px 11px;border:1px solid var(--verde-200)}
+.preview-grid b{display:block;font-size:16px;color:var(--verde-900);font-variant-numeric:tabular-nums}
+.preview-grid span{font-size:10.5px;color:var(--cinza-500);font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.detail-item{background:var(--cinza-100);border-radius:10px;padding:11px 13px}
+.detail-item span{display:block;font-size:11px;font-weight:700;color:var(--cinza-500);text-transform:uppercase;letter-spacing:.04em}
+.detail-item b{font-size:15px;color:var(--cinza-900)}
+.hr{height:1px;background:var(--cinza-200);margin:18px 0;border:0}
+.total-box{background:linear-gradient(135deg,var(--verde-100),var(--verde-50));border:2px solid var(--verde-300);
+  border-radius:var(--raio);padding:16px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;margin-top:16px}
+.total-box .tb-item{text-align:center;flex:1;min-width:130px}
+.total-box .tb-lbl{font-size:11px;font-weight:800;color:var(--verde-800);text-transform:uppercase;letter-spacing:.04em}
+.total-box .tb-val{font-size:24px;font-weight:800;color:var(--verde-900);font-variant-numeric:tabular-nums}
+@media (max-width:980px){
+  .app-shell{flex-direction:column}
+  .sidebar{width:100%;flex:none;height:auto;position:static}
+  .brand{padding:14px 16px}
+  .brand h1{font-size:14.5px}
+  .nav{flex-direction:row;overflow-x:auto;padding:9px 10px;gap:7px}
+  .nav-item{flex-direction:column;gap:3px;padding:8px 12px;font-size:10.5px;min-width:74px;text-align:center;border-radius:11px}
+  .nav-item .ico{font-size:19px}
+  .sidebar-foot{display:none}
+  .topbar{padding:10px 14px;gap:10px}
+  .topbar h2{font-size:16px;width:100%}
+  .seletor-evento{flex:1;min-width:0}
+  .seletor-evento select{max-width:100%;width:100%}
+  .content{padding:14px}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .kpi .k-val{font-size:20px}
+  .modal-backdrop{padding:10px}
+  .modal-body{max-height:calc(100vh - 200px)}
+  #toasts{right:10px;left:10px;bottom:10px;max-width:none}
+  .event-grid{grid-template-columns:1fr}
+  canvas.chart{height:210px}
+}
+@media (max-width:420px){
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .preview-grid{grid-template-columns:1fr 1fr}
+}
+#print-area{display:none}
+@media print{
+  body{background:#fff;font-size:11.5pt}
+  .app-shell,#modal-root,#confirm-root,#toasts{display:none!important}
+  #print-area{display:block!important;padding:0;margin:0}
+  #print-area h1{font-size:18pt;margin-bottom:2mm}
+  #print-area h2{font-size:13pt;margin:6mm 0 2mm;border-bottom:1px solid #999;padding-bottom:1mm}
+  #print-area table{width:100%;border-collapse:collapse;font-size:10pt}
+  #print-area th,#print-area td{border:1px solid #bbb;padding:1.6mm 2mm;text-align:left}
+  #print-area th{background:#eef7f0}
+  #print-area .num{text-align:right}
+  #print-area .pr-head{display:flex;justify-content:space-between;border-bottom:2px solid #176b36;padding-bottom:3mm;margin-bottom:4mm}
+  #print-area .pr-box{border:1px solid #bbb;border-radius:2mm;padding:2.5mm 3mm;margin-bottom:3mm}
+  #print-area .pr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2mm}
+  @page{margin:14mm}
+}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">🌿</div>
+      <div><h1>Charutos de Couve</h1><small>Planejamento &amp; Custos</small></div>
+    </div>
+    <nav class="nav">
+      <button class="nav-item active" data-view="dashboard"><span class="ico">🏠</span><span>Dashboard</span></button>
+      <button class="nav-item" data-view="eventos"><span class="ico">📅</span><span>Eventos</span></button>
+      <button class="nav-item" data-view="insumos"><span class="ico">🛒</span><span>Insumos</span></button>
+      <button class="nav-item" data-view="comparativos"><span class="ico">📊</span><span>Comparativos</span></button>
+      <button class="nav-item" data-view="config"><span class="ico">⚙️</span><span>Configurações</span></button>
+    </nav>
+    <div class="sidebar-foot">💾 Dados salvos no navegador (LocalStorage).</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <h2 id="view-title">🏠 Dashboard</h2>
+      <div class="spacer"></div>
+      <div class="seletor-evento">
+        <label for="seletor-evento">📌 Evento</label>
+        <select id="seletor-evento"></select>
+      </div>
+      <button class="btn primary" data-action="novo-evento">➕ Novo Evento</button>
+    </header>
+
+    <div class="content">
+      <section id="view-dashboard" class="view active"></section>
+      <section id="view-eventos" class="view"></section>
+      <section id="view-insumos" class="view"></section>
+      <section id="view-comparativos" class="view"></section>
+      <section id="view-config" class="view"></section>
+    </div>
+  </div>
+</div>
+
+<div id="modal-root"></div>
+<div id="confirm-root"></div>
+<div id="toasts"></div>
+<div id="print-area"></div>
+
+<script>
+"use strict";
+/* ============================================================================
+ * CHARUTOS DE COUVE — v3.4
+ * Correções desta versão:
+ *   • Totais recalculados a partir do estado, varrendo TODAS as células de custo
+ *   • Removida a re-formatação do input no change (causava "25,0030" ao reeditar)
+ *   • Console.log com os totais para debug (pode remover depois)
+ * ==========================================================================*/
+
+const $ = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
+const clone = o => JSON.parse(JSON.stringify(o));
+const uid = p => p + '_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2,7);
+
+function toNum(v){
+  if (typeof v === 'number') return Number.isFinite(v) ? v : 0;
+  if (v === null || v === undefined) return 0;
+  let s = String(v).trim(); if (!s) return 0;
+  s = s.replace(/\s/g,'').replace(/R\$/gi,'');
+  if (s.includes(',')) s = s.replace(/\./g,'').replace(',','.');
+  const n = parseFloat(s);
+  return Number.isFinite(n) ? n : 0;
+}
+function numOrNull(v){
+  if (v === null || v === undefined) return null;
+  if (typeof v === 'string' && v.trim() === '') return null;
+  return toNum(v);
+}
+function fmtQtd(v, d=2){
+  if (v === null || v === undefined || !Number.isFinite(toNum(v))) return '—';
+  return toNum(v).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:d});
+}
+function fmtMoney(v){
+  if (v === null || v === undefined || !Number.isFinite(toNum(v))) return '—';
+  return toNum(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+}
+function fmtPct(v,d=1){
+  if (v === null || v === undefined || !Number.isFinite(v)) return '—';
+  return v.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:d})+'%';
+}
+function esc(s){
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function hoje(){
+  const d = new Date(), off = d.getTimezoneOffset();
+  return new Date(d.getTime()-off*60000).toISOString().slice(0,10);
+}
+function fmtData(iso){
+  if (!iso) return '—';
+  const p = String(iso).split('-');
+  return p.length===3 ? `${p[2]}/${p[1]}/${p[0]}` : iso;
+}
+const r2 = n => Math.round((toNum(n)+Number.EPSILON)*100)/100;
+const ceilUp = n => Math.ceil(toNum(n)-1e-9);
+const soma = a => (a||[]).reduce((x,y)=>x+toNum(y),0);
+
+/* ---------- Catálogo fixo ---------- */
+const CATALOGO = [
+  { id:'carne',  nome:'Carne moída',       emoji:'🥩', cat:'Recheio', regra:'PCT_RECHEIO', pct:55,
+    unidadeBase:'g', unidadeCompra:'kg', fator:1000, arredondaCima:false },
+  { id:'paio',   nome:'Paio / Chouriço',    emoji:'🌭', cat:'Recheio', regra:'PCT_RECHEIO', pct:30,
+    unidadeBase:'g', unidadeCompra:'kg', fator:1000, arredondaCima:false },
+  { id:'arroz',  nome:'Arroz',              emoji:'🍚', cat:'Recheio', regra:'PCT_RECHEIO', pct:15,
+    unidadeBase:'g', unidadeCompra:'kg', fator:1000, arredondaCima:false },
+  { id:'couve',   nome:'Couve',   emoji:'🌿', cat:'Folha', regra:'PCT_CHARUTOS', pct:60,
+    unidadeBase:'un', unidadeCompra:'maço', fator:1, arredondaCima:true },
+  { id:'repolho', nome:'Repolho', emoji:'🥬', cat:'Folha', regra:'PCT_CHARUTOS', pct:40,
+    unidadeBase:'un', unidadeCompra:'un',   fator:1, arredondaCima:true },
+  { id:'cebola',  nome:'Cebola',          emoji:'🧅', cat:'Tempero', regra:'POR_PESSOA', pct:0.05,
+    unidadeBase:'kg', unidadeCompra:'kg', fator:1, arredondaCima:false },
+  { id:'alho',    nome:'Alho',            emoji:'🧄', cat:'Tempero', regra:'POR_PESSOA', pct:5,
+    unidadeBase:'g',  unidadeCompra:'g',  fator:1, arredondaCima:false },
+  { id:'limao',   nome:'Limão',           emoji:'🍋', cat:'Tempero', regra:'POR_PESSOA', pct:0.5,
+    unidadeBase:'un', unidadeCompra:'un', fator:1, arredondaCima:true },
+  { id:'azeite',  nome:'Azeite',          emoji:'🫒', cat:'Tempero', regra:'POR_PESSOA', pct:5,
+    unidadeBase:'ml', unidadeCompra:'ml', fator:1, arredondaCima:false },
+  { id:'sal',     nome:'Sal',             emoji:'🧂', cat:'Tempero', regra:'POR_PESSOA', pct:3,
+    unidadeBase:'g',  unidadeCompra:'g',  fator:1, arredondaCima:false },
+  { id:'pimenta', nome:'Pimenta-do-reino',emoji:'🌶️', cat:'Tempero', regra:'POR_PESSOA', pct:0.5,
+    unidadeBase:'g',  unidadeCompra:'g',  fator:1, arredondaCima:false },
+  { id:'cheiro',  nome:'Cheiro-verde',    emoji:'🌱', cat:'Tempero', regra:'POR_PESSOA', pct:10,
+    unidadeBase:'g',  unidadeCompra:'g',  fator:1, arredondaCima:false },
+  { id:'palito',  nome:'Palitos para enrolar', emoji:'📌', cat:'Descartável', regra:'POR_CHARUTO', pct:1,
+    unidadeBase:'un', unidadeCompra:'un', fator:1, arredondaCima:true }
+];
+
+const PARAMS_PADRAO = {
+  charutosPorPessoa: 5,
+  recheioPorCharuto: 120,
+  rendimentoCouve:   12,
+  rendimentoRepolho: 15
+};
+
+/* ---------- Estado ---------- */
+const STORAGE_KEY = 'charutosCouve:v3';
+const VERSAO = 3;
+let state = null;
+
+function estadoInicial(){
+  return { versao:VERSAO, params:clone(PARAMS_PADRAO), eventos:[], currentEventId:null };
+}
+
+function carregar(){
+  let st;
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return estadoInicial();
+    const p = JSON.parse(raw);
+    st = {
+      versao: VERSAO,
+      params: Object.assign({}, PARAMS_PADRAO, (p && p.params) || {}),
+      eventos: (p && Array.isArray(p.eventos)) ? p.eventos.map(normEvento) : [],
+      currentEventId: (p && p.currentEventId) || null
+    };
+  }catch(e){
+    console.error('Erro ao ler LocalStorage:', e);
+    return estadoInicial();
+  }
+
+  state = st;
+  try{
+    st.eventos.forEach(ev => {
+      if (!ev.itens || !ev.itens.length) recalcEvento(ev);
+    });
+  }catch(e){
+    console.error('Erro ao recalcular eventos:', e);
+  }
+  return st;
+}
+
+function salvar(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); return true; }
+  catch(e){ console.error(e); toast('Não foi possível salvar.','err'); return false; }
+}
+
+function normEvento(ev){
+  return {
+    id: ev.id || uid('ev'),
+    nome: ev.nome || 'Evento sem nome',
+    data: ev.data || hoje(),
+    pessoas: toNum(ev.pessoas),
+    status: ev.status || 'planejado',
+    observacoes: ev.observacoes || '',
+    charutosPlanejados: toNum(ev.charutosPlanejados),
+    recheioTotalG: toNum(ev.recheioTotalG),
+    itens: Array.isArray(ev.itens) ? ev.itens.map(normItem) : [],
+    custosExtras: Array.isArray(ev.custosExtras) ? ev.custosExtras.map(c => ({
+      id: c.id || uid('cx'),
+      descricao: c.descricao || 'Custo',
+      valor: toNum(c.valor)
+    })) : [],
+    resultado: {
+      produzidos: numOrNull(ev.resultado && ev.resultado.produzidos),
+      consumidos: numOrNull(ev.resultado && ev.resultado.consumidos),
+      pessoasAtendidas: numOrNull(ev.resultado && ev.resultado.pessoasAtendidas)
+    },
+    criadoEm: ev.criadoEm || new Date().toISOString(),
+    atualizadoEm: ev.atualizadoEm || new Date().toISOString()
+  };
+}
+
+function normItem(it){
+  return {
+    id: it.id || uid('it'),
+    catId: it.catId || '',
+    nome: it.nome || 'Insumo',
+    emoji: it.emoji || '🥄',
+    categoria: it.categoria || 'Outros',
+    quantidade: numOrNull(it.quantidade),
+    unidade: it.unidade || 'un',
+    valorUnitario: toNum(it.valorUnitario),
+    custo: numOrNull(it.custo),
+    _qtdManual: !!it._qtdManual
+  };
+}
+
+/* ---------- Motor de cálculo ---------- */
+function calcularInsumos(pessoas){
+  const p = Math.max(0, toNum(pessoas));
+  const cpp = toNum(state.params.charutosPorPessoa);
+  const rpc = toNum(state.params.recheioPorCharuto);
+  const charutos = p * cpp;
+  const recheioG = charutos * rpc;
+
+  return CATALOGO.map(c => {
+    let qtd = 0;
+    if (c.regra === 'PCT_RECHEIO'){
+      qtd = (recheioG * (c.pct/100)) / c.fator;
+    } else if (c.regra === 'PCT_CHARUTOS'){
+      const rend = c.id === 'couve' ? toNum(state.params.rendimentoCouve)
+                 : c.id === 'repolho' ? toNum(state.params.rendimentoRepolho) : 1;
+      const r = rend > 0 ? rend : 1;
+      qtd = (charutos * (c.pct/100)) / r;
+    } else if (c.regra === 'POR_CHARUTO'){
+      qtd = charutos * c.pct;
+    } else if (c.regra === 'POR_PESSOA'){
+      qtd = (p * c.pct) / c.fator;
+    }
+    if (c.arredondaCima) qtd = ceilUp(qtd);
+    else qtd = r2(qtd);
+    return {
+      catId: c.id, nome: c.nome, emoji: c.emoji, categoria: c.cat,
+      quantidade: qtd, unidade: c.unidadeCompra,
+      valorUnitario: 0, custo: 0, _qtdManual: false
+    };
+  });
+}
+
+function recalcEvento(ev){
+  if (!state || !state.params) return ev;
+  const p = toNum(ev.pessoas);
+  ev.charutosPlanejados = p * toNum(state.params.charutosPorPessoa);
+  ev.recheioTotalG = ev.charutosPlanejados * toNum(state.params.recheioPorCharuto);
+
+  const novos = calcularInsumos(p);
+  const antigos = new Map((ev.itens||[]).map(i => [i.catId, i]));
+
+  ev.itens = novos.map(n => {
+    const a = antigos.get(n.catId);
+    if (a){
+      n.valorUnitario = toNum(a.valorUnitario);
+      if (a._qtdManual && a.quantidade !== null && a.quantidade !== undefined){
+        n.quantidade = toNum(a.quantidade);
+        n._qtdManual = true;
+      }
+      n.custo = r2((n.quantidade||0) * n.valorUnitario);
+    }
+    return n;
+  });
+  ev.atualizadoEm = new Date().toISOString();
+  return ev;
+}
+
+function totaisEvento(ev){
+  const itens = ev.itens || [];
+  const custoIngredientes = soma(itens.map(i => i.custo || 0));
+  const custoExtras = soma((ev.custosExtras||[]).map(c => c.valor));
+  const custoTotal = custoIngredientes + custoExtras;
+  const p = toNum(ev.pessoas);
+  const planejados = toNum(ev.charutosPlanejados);
+  return {
+    custoIngredientes, custoExtras, custoTotal,
+    custoPorPessoa: p>0 ? custoTotal/p : 0,
+    custoPorCharuto: planejados>0 ? custoTotal/planejados : 0,
+    faltamValores: itens.some(i => toNum(i.valorUnitario) <= 0)
+  };
+}
+
+function metricas(ev){
+  const t = totaisEvento(ev);
+  const r = ev.resultado || {};
+  const produzidos = numOrNull(r.produzidos);
+  const consumidos = numOrNull(r.consumidos);
+  const pessoasAtendidas = numOrNull(r.pessoasAtendidas) !== null ? numOrNull(r.pessoasAtendidas) : toNum(ev.pessoas);
+  const planejados = toNum(ev.charutosPlanejados);
+  const sobra = (produzidos !== null && consumidos !== null) ? produzidos - consumidos : null;
+  const sobraPct = (sobra !== null && produzidos > 0) ? (sobra/produzidos)*100 : null;
+  const consumoPP = (consumidos !== null && pessoasAtendidas > 0) ? consumidos/pessoasAtendidas : null;
+  return Object.assign({
+    pessoas: toNum(ev.pessoas),
+    produzidos, consumidos, pessoasAtendidas, planejados,
+    sobra, sobraPct, consumoPP,
+    temResultado: (produzidos !== null || consumidos !== null),
+    producaoInsuficiente: (produzidos !== null && consumidos !== null && consumidos > produzidos)
+  }, t);
+}
+
+/* ---------- CRUD ---------- */
+function criarEvento(d){
+  const ev = normEvento({
+    id: uid('ev'), nome: d.nome, data: d.data, pessoas: d.pessoas,
+    status: 'planejado', observacoes: d.observacoes || '',
+    custosExtras: [],
+    resultado: { produzidos:null, consumidos:null, pessoasAtendidas:null }
+  });
+  recalcEvento(ev);
+  state.eventos.unshift(ev);
+  state.currentEventId = ev.id;
+  salvar();
+  return ev;
+}
+
+function atualizarEvento(id, d){
+  const ev = state.eventos.find(e => e.id === id);
+  if (!ev) return null;
+  ev.nome = d.nome;
+  ev.data = d.data;
+  ev.status = d.status || ev.status;
+  ev.observacoes = d.observacoes || '';
+  const pp = toNum(d.pessoas);
+  if (pp !== toNum(ev.pessoas)){
+    ev.pessoas = pp;
+    recalcEvento(ev);
+  } else {
+    ev.pessoas = pp;
+  }
+  ev.atualizadoEm = new Date().toISOString();
+  salvar();
+  return ev;
+}
+
+function excluirEvento(id){
+  const i = state.eventos.findIndex(e => e.id === id);
+  if (i < 0) return false;
+  state.eventos.splice(i,1);
+  if (state.currentEventId === id) state.currentEventId = state.eventos[0]?.id || null;
+  salvar();
+  return true;
+}
+
+function atualizarItem(eventId, itemId, campo, valor){
+  const ev = state.eventos.find(e => e.id === eventId);
+  if (!ev) return;
+  const it = (ev.itens||[]).find(i => i.id === itemId);
+  if (!it) return;
+  if (campo === 'quantidade'){
+    it.quantidade = toNum(valor);
+    it._qtdManual = true;
+  } else if (campo === 'valorUnitario'){
+    it.valorUnitario = toNum(valor);
+  }
+  it.custo = r2(toNum(it.quantidade) * toNum(it.valorUnitario));
+  ev.atualizadoEm = new Date().toISOString();
+  salvar();
+}
+
+function restaurarQtd(eventId, itemId){
+  const ev = state.eventos.find(e => e.id === eventId);
+  if (!ev) return;
+  const it = (ev.itens||[]).find(i => i.id === itemId);
+  if (!it) return;
+  const ref = calcularInsumos(ev.pessoas).find(x => x.catId === it.catId);
+  if (ref){
+    it.quantidade = ref.quantidade;
+    it._qtdManual = false;
+    it.custo = r2(toNum(it.quantidade) * toNum(it.valorUnitario));
+  }
+  salvar();
+}
+
+function addCustoExtra(evId, desc, valor){
+  const ev = state.eventos.find(e => e.id === evId); if (!ev) return;
+  ev.custosExtras = ev.custosExtras || [];
+  ev.custosExtras.push({ id: uid('cx'), descricao: desc || 'Despesa', valor: toNum(valor) });
+  salvar();
+}
+function updCustoExtra(evId, cxId, campo, valor){
+  const ev = state.eventos.find(e => e.id === evId); if (!ev) return;
+  const c = (ev.custosExtras||[]).find(x => x.id === cxId); if (!c) return;
+  if (campo === 'descricao') c.descricao = String(valor||'');
+  if (campo === 'valor') c.valor = toNum(valor);
+  salvar();
+}
+function delCustoExtra(evId, cxId){
+  const ev = state.eventos.find(e => e.id === evId); if (!ev) return;
+  ev.custosExtras = (ev.custosExtras||[]).filter(x => x.id !== cxId);
+  salvar();
+}
+function updResultado(evId, campo, valor){
+  const ev = state.eventos.find(e => e.id === evId); if (!ev) return;
+  ev.resultado = ev.resultado || {};
+  ev.resultado[campo] = (valor === '' || valor === null) ? null : toNum(valor);
+  if (ev.status === 'planejado' && (ev.resultado.produzidos !== null || ev.resultado.consumidos !== null))
+    ev.status = 'realizado';
+  ev.atualizadoEm = new Date().toISOString();
+  salvar();
+}
+
+/* ---------- Toasts e modais ---------- */
+function toast(msg, tipo='ok', dur=3500){
+  const host = $('#toasts'); if (!host) return;
+  const el = document.createElement('div');
+  el.className = 'toast ' + tipo;
+  const ic = { ok:'✅', warn:'⚠️', err:'🔴', info:'ℹ️' };
+  el.innerHTML = `<span class="ti">${ic[tipo]||'ℹ️'}</span><span>${esc(msg)}</span>`;
+  host.appendChild(el);
+  setTimeout(() => {
+    el.style.transition = 'opacity .3s,transform .3s';
+    el.style.opacity = '0'; el.style.transform = 'translateX(30px)';
+    setTimeout(() => el.remove(), 320);
+  }, dur);
+}
+
+function openModal({ titulo, corpo, rodape, largura='680px' }){
+  const root = $('#modal-root');
+  root.innerHTML = `
+    <div class="modal-backdrop" data-backdrop="1">
+      <div class="modal" style="max-width:${largura}">
+        <div class="modal-head"><h3>${titulo}</h3>
+          <button class="icon-btn" data-action="fechar-modal">✕</button></div>
+        <div class="modal-body">${corpo}</div>
+        ${rodape ? `<div class="modal-foot">${rodape}</div>` : ''}
+      </div>
+    </div>`;
+  root.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(){
+  const root = $('#modal-root');
+  root.classList.remove('open');
+  root.innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+function confirmar(msg, opts = {}){
+  const { titulo='Confirmação', textoOk='Confirmar', textoCancelar='Cancelar', perigo=true } = opts;
+  return new Promise(resolve => {
+    const root = $('#confirm-root');
+    root.innerHTML = `
+      <div class="modal-backdrop" data-backdrop="1">
+        <div class="modal">
+          <div class="modal-head"><h3>${titulo}</h3></div>
+          <div class="modal-body">
+            <div class="alert ${perigo?'err':'info'}" style="margin:0">
+              <span class="ai">${perigo?'⚠️':'ℹ️'}</span><span>${msg}</span>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn ghost" data-confirm="0">${textoCancelar}</button>
+            <button class="btn ${perigo?'danger':'primary'}" data-confirm="1">${textoOk}</button>
+          </div>
+        </div>
+      </div>`;
+    root.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    const fim = v => { root.classList.remove('open'); root.innerHTML=''; document.body.style.overflow=''; resolve(v); };
+    root.querySelectorAll('[data-confirm]').forEach(b => b.addEventListener('click', () => fim(b.dataset.confirm==='1')));
+    root.querySelector('[data-backdrop]').addEventListener('click', e => { if (e.target.dataset.backdrop) fim(false); });
+  });
+}
+
+/* ---------- Componentes ---------- */
+function kpi(ico, val, lbl, sub, cls=''){
+  return `<div class="kpi ${cls}">
+    <span class="k-ico">${ico}</span>
+    <div class="k-val">${val}</div>
+    <div class="k-lbl">${lbl}</div>
+    ${sub?`<div class="k-sub">${sub}</div>`:''}
+  </div>`;
+}
+function emptyState(ico, tit, txt, btn=''){
+  return `<div class="empty"><span class="e-ico">${ico}</span><h3>${tit}</h3><p>${txt}</p>${btn}</div>`;
+}
+function badgeSobra(m){
+  if (m.sobra === null) return `<span class="badge cinza">Sem resultado</span>`;
+  if (m.sobra < 0) return `<span class="badge vermelho">🔴 Faltaram ${fmtQtd(Math.abs(m.sobra),0)}</span>`;
+  if (m.sobra === 0) return `<span class="badge verde">✅ Sem sobras</span>`;
+  return `<span class="badge amarelo">📦 Sobra ${fmtQtd(m.sobra,0)}</span>`;
+}
+
+/* ---------- Seletor ---------- */
+function renderSeletor(){
+  const sel = $('#seletor-evento');
+  if (!sel) return;
+  if (!state.eventos.length){
+    sel.innerHTML = '<option value="">— Nenhum evento —</option>';
+    sel.disabled = true; return;
+  }
+  sel.disabled = false;
+  const ord = [...state.eventos].sort((a,b) => (b.data||'').localeCompare(a.data||''));
+  sel.innerHTML = ord.map(e =>
+    `<option value="${e.id}" ${e.id===state.currentEventId?'selected':''}>${esc(e.nome)} — ${fmtData(e.data)}</option>`
+  ).join('');
+}
+
+function evAtual(){
+  if (!state.eventos.length) return null;
+  let ev = state.eventos.find(e => e.id === state.currentEventId);
+  if (!ev){ ev = state.eventos[0]; state.currentEventId = ev.id; }
+  return ev;
+}
+
+/* ---------- Dashboard ---------- */
+function renderDashboard(){
+  const host = $('#view-dashboard');
+  const ev = evAtual();
+
+  if (!state.eventos.length){
+    host.innerHTML = `<div class="card">
+      ${emptyState('🌿','Bem-vindo!',
+        'Cadastre seu primeiro evento. Informe o nome, a data e o número de pessoas — o app calcula automaticamente as quantidades dos insumos e você só precisa preencher os valores unitários na lista.',
+        '<button class="btn primary" data-action="novo-evento">➕ Criar primeiro evento</button>')}
+    </div>`;
+    return;
+  }
+
+  const m = metricas(ev);
+  let html = `<div class="section-title">📌 Evento selecionado: ${esc(ev.nome)}</div>`;
+
+  html += `<div class="kpi-grid">
+    ${kpi('👥', fmtQtd(m.pessoas,0), 'Pessoas', `📅 ${fmtData(ev.data)}`)}
+    ${kpi('🌯', fmtQtd(m.planejados,0), 'Charutos planejados', `${fmtQtd(state.params.charutosPorPessoa,0)} por pessoa`)}
+    ${kpi('⚖️', fmtQtd(ev.recheioTotalG/1000,2)+' kg', 'Recheio total', `${fmtQtd(state.params.recheioPorCharuto,0)} g por charuto`)}
+    ${kpi('🍽️', m.produzidos!==null?fmtQtd(m.produzidos,0):'—', 'Produzidos', m.produzidos!==null?'Registrado':'Aguardando')}
+    ${kpi('✅', m.consumidos!==null?fmtQtd(m.consumidos,0):'—', 'Consumidos', m.consumoPP!==null?`${fmtQtd(m.consumoPP,2)} por pessoa`:'')}
+    ${kpi('📦', m.sobra!==null?fmtQtd(m.sobra,0):'—', 'Sobras', m.sobraPct!==null?`${fmtPct(m.sobraPct)} do produzido`:'', m.sobra===null?'':(m.sobra<0?'bad':'warn'))}
+    ${kpi('💰', fmtMoney(m.custoIngredientes), 'Custo dos insumos', m.faltamValores?'Faltam valores':'Completo', 'money')}
+    ${kpi('💵', fmtMoney(m.custoTotal), 'Custo total', 'Insumos + despesas', 'money')}
+  </div>`;
+
+  if (m.faltamValores){
+    html += `<div class="alert warn"><span class="ai">💰</span>
+      <span>Alguns insumos ainda não têm <b>valor unitário</b> preenchido.
+      Vá em <b>🛒 Insumos</b> e preencha para ver o custo total.</span></div>`;
+  }
+  if (m.producaoInsuficiente){
+    html += `<div class="alert err"><span class="ai">🔴</span>
+      <span>Produção insuficiente: faltaram <b>${fmtQtd(Math.abs(m.sobra),0)} charutos</b>.</span></div>`;
+  }
+  if (m.sobra !== null && m.sobra > 0 && m.sobraPct > 15){
+    html += `<div class="alert warn"><span class="ai">⚠️</span>
+      <span>Sobra elevada: <b>${fmtPct(m.sobraPct)}</b> do produzido não foi consumido.</span></div>`;
+  }
+  if (m.temResultado && m.sobra !== null && m.sobra >= 0 && m.sobraPct <= 15){
+    html += `<div class="alert ok"><span class="ai">✅</span>
+      <span>Evento dentro do esperado. Sobraram <b>${fmtQtd(m.sobra,0)} charutos</b> (${fmtPct(m.sobraPct)}).</span></div>`;
+  }
+
+  host.innerHTML = html;
+}
+
+/* ---------- Eventos ---------- */
+const filtros = { busca:'', status:'todos' };
+
+function renderEventos(){
+  const host = $('#view-eventos');
+  const lista = state.eventos.filter(ev => {
+    if (filtros.busca && !ev.nome.toLowerCase().includes(filtros.busca.toLowerCase())) return false;
+    if (filtros.status !== 'todos' && ev.status !== filtros.status) return false;
+    return true;
+  }).sort((a,b) => (b.data||'').localeCompare(a.data||''));
+
+  let html = `
+    <div class="card">
+      <div class="card-head">
+        <h3>🔎 Filtros</h3>
+        <div class="spacer"></div>
+        <button class="btn ghost sm" data-action="limpar-filtros">🧹 Limpar</button>
+      </div>
+      <div class="filters">
+        <div class="field"><label>Nome</label>
+          <input type="search" id="f-busca" value="${esc(filtros.busca)}" placeholder="Buscar..."></div>
+        <div class="field"><label>Status</label>
+          <select id="f-status">
+            <option value="todos" ${filtros.status==='todos'?'selected':''}>Todos</option>
+            <option value="planejado" ${filtros.status==='planejado'?'selected':''}>Planejado</option>
+            <option value="realizado" ${filtros.status==='realizado'?'selected':''}>Realizado</option>
+          </select></div>
+      </div>
+    </div>
+    <div class="card-head" style="margin-bottom:12px">
+      <h3>📅 Eventos (${lista.length} de ${state.eventos.length})</h3>
+      <div class="spacer"></div>
+      <button class="btn primary sm" data-action="novo-evento">➕ Novo evento</button>
+    </div>`;
+
+  if (!lista.length){
+    html += `<div class="card">${emptyState('📅',
+      state.eventos.length?'Nenhum evento encontrado':'Nenhum evento cadastrado',
+      state.eventos.length?'Ajuste os filtros.':'Crie seu primeiro evento.',
+      '<button class="btn primary" data-action="novo-evento">➕ Criar evento</button>')}</div>`;
+  } else {
+    html += '<div class="event-grid">' + lista.map(ev => {
+      const m = metricas(ev);
+      return `<div class="event-card">
+        <div>
+          <h4>${esc(ev.nome)}</h4>
+          <div class="meta">
+            <span>📅 ${fmtData(ev.data)}</span>
+            <span>👥 ${fmtQtd(m.pessoas,0)} pessoas</span>
+          </div>
+        </div>
+        <div>
+          <span class="badge ${ev.status==='realizado'?'azul':'cinza'}">${ev.status==='realizado'?'✅ Realizado':'📅 Planejado'}</span>
+          ${badgeSobra(m)}
+        </div>
+        <div class="mini-stats">
+          <div><span>Planejados</span><b>${fmtQtd(m.planejados,0)}</b></div>
+          <div><span>Produzidos</span><b>${m.produzidos!==null?fmtQtd(m.produzidos,0):'—'}</b></div>
+          <div><span>Consumidos</span><b>${m.consumidos!==null?fmtQtd(m.consumidos,0):'—'}</b></div>
+          <div><span>Custo total</span><b>${fmtMoney(m.custoTotal)}</b></div>
+        </div>
+        <div class="acts">
+          <button class="btn soft sm" data-action="abrir-evento" data-id="${ev.id}">📂 Abrir</button>
+          <button class="btn ghost sm" data-action="editar-evento" data-id="${ev.id}">✏️ Editar</button>
+          <button class="btn ghost sm" data-action="relatorio" data-id="${ev.id}">📄 Relatório</button>
+          <button class="btn danger-soft sm" data-action="excluir-evento" data-id="${ev.id}">🗑️</button>
+        </div>
+      </div>`;
+    }).join('') + '</div>';
+  }
+  host.innerHTML = html;
+}
+
+/* ============================================================================
+ * LISTA DE INSUMOS
+ * ==========================================================================*/
+function renderInsumos(){
+  const host = $('#view-insumos');
+  const ev = evAtual();
+
+  if (!ev){
+    host.innerHTML = `<div class="card">${emptyState('🛒','Nenhum evento selecionado',
+      'Crie ou selecione um evento para ver a lista de insumos.',
+      '<button class="btn primary" data-action="novo-evento">➕ Novo evento</button>')}</div>`;
+    return;
+  }
+
+  const m = metricas(ev);
+  const itens = ev.itens || [];
+
+  const linhas = itens.map(it => {
+    const manual = it._qtdManual;
+    return `<tr data-row="${it.id}">
+      <td><b>${it.emoji} ${esc(it.nome)}</b><br><small style="color:var(--cinza-500)">${esc(it.categoria)}</small></td>
+      <td class="num">
+        <input class="mini-input qtd" type="text" inputmode="decimal" autocomplete="off"
+               data-role="qtd-item" data-evid="${ev.id}" data-iid="${it.id}"
+               value="${it.quantidade ?? 0}">
+        <span class="btn-restaurar" data-slot="${it.id}">${manual
+          ? `<button class="icon-btn" title="Restaurar cálculo automático"
+              data-action="restaurar-qtd" data-evid="${ev.id}" data-iid="${it.id}">↩️</button>`
+          : ''}</span>
+      </td>
+      <td>${esc(it.unidade)}</td>
+      <td class="num">
+        <input class="mini-input" type="text" inputmode="decimal" autocomplete="off"
+               data-role="valor-item" data-evid="${ev.id}" data-iid="${it.id}"
+               value="${it.valorUnitario>0 ? it.valorUnitario : ''}"
+               placeholder="R$">
+      </td>
+      <td class="num mono custo-cell" data-slot="${it.id}"><b>${it.valorUnitario>0 ? fmtMoney(it.custo) : '—'}</b></td>
+    </tr>`;
+  }).join('');
+
+  const extras = ev.custosExtras || [];
+  const linhasExtras = extras.length ? extras.map(c => `
+    <tr>
+      <td><input class="mini-input" type="text" style="width:100%;max-width:300px;text-align:left"
+        data-role="extra-desc" data-evid="${ev.id}" data-cid="${c.id}" value="${esc(c.descricao)}"></td>
+      <td class="num">
+        <input class="mini-input" type="text" inputmode="decimal"
+          data-role="extra-valor" data-evid="${ev.id}" data-cid="${c.id}" value="${c.valor}">
+      </td>
+      <td class="center">
+        <button class="btn danger-soft sm" data-action="del-extra" data-evid="${ev.id}" data-cid="${c.id}">🗑️</button>
+      </td>
+    </tr>`).join('') : `<tr><td colspan="3" class="center" style="color:var(--cinza-500);padding:18px">Nenhuma despesa adicional.</td></tr>`;
+
+  host.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <h3>🛒 Insumos — ${esc(ev.nome)}</h3>
+        <div class="spacer"></div>
+        <button class="btn ghost sm" data-action="relatorio" data-id="${ev.id}">📄 Relatório</button>
+      </div>
+
+      <div class="detail-grid" style="margin-bottom:16px">
+        <div class="detail-item"><span>📅 Data</span><b>${fmtData(ev.data)}</b></div>
+        <div class="detail-item"><span>👥 Pessoas</span><b>${fmtQtd(m.pessoas,0)}</b></div>
+        <div class="detail-item"><span>🌯 Charutos</span><b>${fmtQtd(m.planejados,0)}</b></div>
+        <div class="detail-item"><span>⚖️ Recheio total</span><b>${fmtQtd(ev.recheioTotalG/1000,2)} kg</b></div>
+      </div>
+
+      ${m.faltamValores ? `<div class="alert warn"><span class="ai">💰</span>
+        <span>Preencha o <b>valor unitário</b> de cada insumo na coluna "Valor unit." para calcular os custos automaticamente.</span></div>` : ''}
+
+      <div class="table-wrap">
+        <table class="tbl" style="min-width:720px">
+          <thead><tr>
+            <th>Insumo</th>
+            <th class="num">Quantidade</th>
+            <th>Unidade</th>
+            <th class="num">Valor unit. (R$)</th>
+            <th class="num">Custo</th>
+          </tr></thead>
+          <tbody>${linhas}</tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" class="num">TOTAL DOS INSUMOS</td>
+              <td class="num" id="total-insumos">${fmtMoney(m.custoIngredientes)}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <p class="card-sub" style="margin-top:12px">
+        💡 <b>Quantidade</b> é calculada pelo número de pessoas — você pode ajustar se quiser (clique em ↩️ para voltar ao automático).
+        <b>Valor unit.</b> aceita vírgula ou ponto — preencha e o <b>custo</b> é calculado automaticamente.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>🧾 Outras despesas</h3>
+        <div class="card-sub">Mão de obra, gás, transporte, descartáveis, etc.</div></div>
+      <div class="table-wrap" style="margin-bottom:12px">
+        <table class="tbl">
+          <thead><tr><th>Descrição</th><th class="num">Valor (R$)</th><th class="center">Ação</th></tr></thead>
+          <tbody>${linhasExtras}</tbody>
+          <tfoot><tr><td class="num">SUBTOTAL</td>
+            <td class="num" id="total-extras">${fmtMoney(m.custoExtras)}</td><td></td></tr></tfoot>
+        </table>
+      </div>
+      <div class="grid-3" style="align-items:end">
+        <div class="field" style="margin-bottom:0">
+          <label>Descrição</label>
+          <input type="text" id="nova-desc" placeholder="Ex.: Gás, transporte...">
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Valor (R$)</label>
+          <input type="text" inputmode="decimal" id="novo-valor" placeholder="0,00">
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <button class="btn primary block" data-action="add-extra" data-evid="${ev.id}">➕ Adicionar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>💵 Resumo financeiro</h3></div>
+      <div class="total-box">
+        <div class="tb-item">
+          <div class="tb-lbl">Insumos</div>
+          <div class="tb-val" id="tb-insumos">${fmtMoney(m.custoIngredientes)}</div>
+        </div>
+        <div class="tb-item">
+          <div class="tb-lbl">Despesas extras</div>
+          <div class="tb-val" id="tb-extras">${fmtMoney(m.custoExtras)}</div>
+        </div>
+        <div class="tb-item">
+          <div class="tb-lbl">Custo total</div>
+          <div class="tb-val" id="tb-total">${fmtMoney(m.custoTotal)}</div>
+        </div>
+        <div class="tb-item">
+          <div class="tb-lbl">Por pessoa</div>
+          <div class="tb-val" id="tb-pessoa">${fmtMoney(m.custoPorPessoa)}</div>
+        </div>
+        <div class="tb-item">
+          <div class="tb-lbl">Por charuto</div>
+          <div class="tb-val" id="tb-charuto">${fmtMoney(m.custoPorCharuto)}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>📋 Resultado real do evento</h3>
+        <div class="card-sub">Preencha após o evento para acompanhar sobras e consumo.</div>
+      </div>
+      <div class="grid-4">
+        <div class="field"><label>🍽️ Charutos produzidos</label>
+          <input type="text" inputmode="numeric" data-role="resultado" data-evid="${ev.id}" data-campo="produzidos"
+            value="${m.produzidos!==null?m.produzidos:''}" placeholder="—"></div>
+        <div class="field"><label>✅ Charutos consumidos</label>
+          <input type="text" inputmode="numeric" data-role="resultado" data-evid="${ev.id}" data-campo="consumidos"
+            value="${m.consumidos!==null?m.consumidos:''}" placeholder="—"></div>
+        <div class="field"><label>👥 Pessoas atendidas</label>
+          <input type="text" inputmode="numeric" data-role="resultado" data-evid="${ev.id}" data-campo="pessoasAtendidas"
+            value="${m.pessoasAtendidas!==null?m.pessoasAtendidas:''}" placeholder="—"></div>
+        <div class="field"><label>📦 Sobra / falta</label>
+          <input type="text" disabled value="${m.sobra!==null?fmtQtd(m.sobra,0)+' charutos':'—'}"
+            style="background:var(--cinza-100)"></div>
+      </div>
+      <div class="preview-box">
+        <h4>Análise</h4>
+        <div class="preview-grid">
+          <div><span>Planejado</span><b>${fmtQtd(m.planejados,0)}</b></div>
+          <div><span>Produzido</span><b>${m.produzidos!==null?fmtQtd(m.produzidos,0):'—'}</b></div>
+          <div><span>Consumido</span><b>${m.consumidos!==null?fmtQtd(m.consumidos,0):'—'}</b></div>
+          <div><span>Sobra</span><b>${m.sobra!==null?fmtQtd(m.sobra,0):'—'}</b></div>
+          <div><span>% Sobra</span><b>${m.sobraPct!==null?fmtPct(m.sobraPct):'—'}</b></div>
+          <div><span>Consumo/pessoa</span><b>${m.consumoPP!==null?fmtQtd(m.consumoPP,2):'—'}</b></div>
+        </div>
+      </div>
+      ${m.producaoInsuficiente ? `<div class="alert err" style="margin-top:12px"><span class="ai">🔴</span>
+        <span>Produção insuficiente para o consumo: faltaram <b>${fmtQtd(Math.abs(m.sobra),0)} charutos</b>.</span></div>` : ''}
+      ${m.sobra !== null && m.sobra > 0 && m.sobraPct > 15 ? `<div class="alert warn" style="margin-top:12px"><span class="ai">⚠️</span>
+        <span>Sobra elevada: <b>${fmtPct(m.sobraPct)}</b> do produzido não foi consumido.</span></div>` : ''}
+    </div>`;
+}
+
+/* ---------- Comparativos ---------- */
+const selecionados = new Set();
+
+function renderComparativos(){
+  const host = $('#view-comparativos');
+  if (!state.eventos.length){
+    host.innerHTML = `<div class="card">${emptyState('📊','Nada para comparar',
+      'Cadastre pelo menos dois eventos para comparar.')}</div>`;
+    return;
+  }
+  Array.from(selecionados).forEach(id => { if (!state.eventos.some(e => e.id === id)) selecionados.delete(id); });
+  const ord = [...state.eventos].sort((a,b) => (b.data||'').localeCompare(a.data||''));
+
+  let html = `
+    <div class="card">
+      <div class="card-head">
+        <h3>📊 Selecione os eventos para comparar</h3>
+        <div class="spacer"></div>
+        <button class="btn ghost sm" data-action="comp-todos">✅ Todos</button>
+        <button class="btn ghost sm" data-action="comp-limpar">🧹 Limpar</button>
+      </div>
+      <div class="check-list">
+        ${ord.map(ev => {
+          const m = metricas(ev);
+          return `<label class="check-item">
+            <input type="checkbox" data-role="chk" value="${ev.id}" ${selecionados.has(ev.id)?'checked':''}>
+            <span class="ci-txt">${esc(ev.nome)}
+              <small>${fmtData(ev.data)} • ${fmtQtd(m.pessoas,0)} pessoas • ${fmtQtd(m.planejados,0)} charutos</small>
+            </span>
+          </label>`;
+        }).join('')}
+      </div>
+    </div>`;
+
+  const sel = ord.filter(e => selecionados.has(e.id));
+  if (sel.length < 2){
+    html += `<div class="card">${emptyState('🔍','Selecione 2 ou mais eventos',
+      'Marque pelo menos dois eventos acima para ver o comparativo.')}</div>`;
+    host.innerHTML = html; return;
+  }
+
+  const dados = sel.map(ev => ({ ev, m: metricas(ev) }));
+
+  const linhas = dados.map(({ ev, m }) => `<tr>
+    <td><b>${esc(ev.nome)}</b><br><small style="color:var(--cinza-500)">${fmtData(ev.data)}</small></td>
+    <td class="num mono">${fmtQtd(m.pessoas,0)}</td>
+    <td class="num mono">${fmtQtd(m.planejados,0)}</td>
+    <td class="num mono">${m.produzidos!==null?fmtQtd(m.produzidos,0):'—'}</td>
+    <td class="num mono">${m.consumidos!==null?fmtQtd(m.consumidos,0):'—'}</td>
+    <td class="num mono">${m.sobra!==null?fmtQtd(m.sobra,0):'—'}</td>
+    <td class="num mono">${m.sobraPct!==null?fmtPct(m.sobraPct):'—'}</td>
+    <td class="num mono">${m.consumoPP!==null?fmtQtd(m.consumoPP,2):'—'}</td>
+    <td class="num mono">${fmtMoney(m.custoTotal)}</td>
+    <td class="num mono">${fmtMoney(m.custoPorPessoa)}</td>
+  </tr>`).join('');
+
+  html += `
+    <div class="card">
+      <div class="card-head"><h3>📊 Comparativo (${dados.length} eventos)</h3></div>
+      <div class="table-wrap">
+        <table class="tbl" style="min-width:900px">
+          <thead><tr>
+            <th>Evento</th><th class="num">Pessoas</th><th class="num">Planej.</th>
+            <th class="num">Produz.</th><th class="num">Consum.</th><th class="num">Sobra</th>
+            <th class="num">% Sobra</th><th class="num">Cons./pess.</th>
+            <th class="num">Custo total</th><th class="num">Custo/pessoa</th>
+          </tr></thead>
+          <tbody>${linhas}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <h3>🌯 Planejado × Produzido × Consumido</h3>
+      <canvas class="chart" id="chart-comp-1"></canvas>
+      <div class="chart-legend">
+        <span><i style="background:#27a355"></i>Planejado</span>
+        <span><i style="background:#1d4ed8"></i>Produzido</span>
+        <span><i style="background:#d97706"></i>Consumido</span>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <h3>💰 Custo total por evento</h3>
+      <canvas class="chart" id="chart-comp-2"></canvas>
+      <div class="chart-legend"><span><i style="background:#1d4ed8"></i>Custo total (R$)</span></div>
+    </div>
+
+    <div class="chart-box">
+      <h3>📈 Consumo por pessoa</h3>
+      <canvas class="chart" id="chart-comp-3"></canvas>
+      <div class="chart-legend"><span><i style="background:#176b36"></i>Charutos por pessoa</span></div>
+    </div>`;
+
+  host.innerHTML = html;
+
+  const labels = dados.map(d => d.ev.nome);
+  desenharBarras($('#chart-comp-1'), labels, [
+    { cor:'#27a355', valores: dados.map(d => d.m.planejados) },
+    { cor:'#1d4ed8', valores: dados.map(d => d.m.produzidos||0) },
+    { cor:'#d97706', valores: dados.map(d => d.m.consumidos||0) }
+  ]);
+  desenharBarras($('#chart-comp-2'), labels, [
+    { cor:'#1d4ed8', valores: dados.map(d => d.m.custoTotal) }
+  ]);
+  desenharBarras($('#chart-comp-3'), labels, [
+    { cor:'#176b36', valores: dados.map(d => d.m.consumoPP||0) }
+  ]);
+}
+
+function desenharBarras(canvas, labels, series){
+  if (!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth || 600;
+  const h = canvas.clientHeight || 240;
+  canvas.width = Math.round(w*dpr);
+  canvas.height = Math.round(h*dpr);
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,w,h);
+  if (!labels.length){
+    ctx.fillStyle = '#6b7a73'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = '12px sans-serif';
+    ctx.fillText('Sem dados', w/2, h/2);
+    return;
+  }
+  const pad = { top:22, right:16, bottom:56, left:56 };
+  const cw = w-pad.left-pad.right;
+  const ch = h-pad.top-pad.bottom;
+  const todos = series.flatMap(s => s.valores.map(toNum));
+  const max = Math.max(1, ...todos) * 1.15;
+
+  ctx.strokeStyle = '#e2e9e5';
+  ctx.fillStyle = '#6b7a73';
+  ctx.font = '11px -apple-system,sans-serif';
+  ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  for (let i=0; i<=4; i++){
+    const y = Math.round(pad.top + ch - (ch*i/4)) + .5;
+    ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(pad.left+cw,y); ctx.stroke();
+    const v = max*i/4;
+    ctx.fillText(v>=1000 ? (v/1000).toFixed(1)+'k' : v.toFixed(v>=10?0:1), pad.left-6, y);
+  }
+
+  const grupoW = cw / labels.length;
+  const nS = Math.max(1, series.length);
+  const barW = Math.min(46, (grupoW*0.7)/nS);
+
+  labels.forEach((lb,i) => {
+    const centro = pad.left + grupoW*i + grupoW/2;
+    const ini = centro - (barW*nS)/2;
+    series.forEach((s,si) => {
+      const v = toNum(s.valores[i]);
+      const alt = (v/max)*ch;
+      const x = ini + si*barW;
+      const y = pad.top + ch - alt;
+      ctx.fillStyle = s.cor;
+      ctx.fillRect(x+1, y, Math.max(2, barW-2), alt);
+      if (v > 0 && labels.length <= 10){
+        ctx.fillStyle = '#41504a';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+        ctx.font = '10px -apple-system,sans-serif';
+        ctx.fillText(v>=1000?(v/1000).toFixed(1)+'k':v.toFixed(v>=10?0:1), x+barW/2, y-3);
+      }
+    });
+    ctx.fillStyle = '#6b7a73';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    ctx.font = '11px -apple-system,sans-serif';
+    const txt = lb.length > 14 ? lb.slice(0,13)+'…' : lb;
+    ctx.fillText(txt, centro, pad.top+ch+8);
+  });
+}
+
+/* ---------- Configurações ---------- */
+function renderConfig(){
+  const host = $('#view-config');
+  const p = state.params;
+
+  host.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <h3>⚙️ Parâmetros da receita</h3>
+        <div class="card-sub">Estes valores definem como as quantidades são calculadas a partir do número de pessoas.</div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>🌯 Charutos por pessoa</label>
+          <input type="number" id="cfg-cpp" min="0.1" step="0.1" value="${toNum(p.charutosPorPessoa)}">
+          <span class="hint">Padrão do prompt: 5</span></div>
+        <div class="field"><label>⚖️ Recheio por charuto (g)</label>
+          <input type="number" id="cfg-rpc" min="1" step="1" value="${toNum(p.recheioPorCharuto)}">
+          <span class="hint">Padrão do prompt: 120 g</span></div>
+        <div class="field"><label>🌿 Rendimento da couve</label>
+          <input type="number" id="cfg-rend-couve" min="1" step="1" value="${toNum(p.rendimentoCouve)}">
+          <span class="hint">Quantos charutos rende 1 maço de couve</span></div>
+        <div class="field"><label>🥬 Rendimento do repolho</label>
+          <input type="number" id="cfg-rend-repolho" min="1" step="1" value="${toNum(p.rendimentoRepolho)}">
+          <span class="hint">Quantos charutos rende 1 repolho</span></div>
+      </div>
+      <button class="btn primary" data-action="salvar-config">💾 Salvar parâmetros</button>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>📐 Composição do recheio e das folhas</h3></div>
+      <div class="alert info" style="margin:0 0 14px">
+        <span class="ai">ℹ️</span>
+        <span>Proporções definidas no prompt. Para ajustar, edite <code>CATALOGO</code> no código.</span>
+      </div>
+      <div class="detail-grid">
+        <div class="detail-item"><span>🥩 Carne</span><b>55% do recheio</b></div>
+        <div class="detail-item"><span>🌭 Paio</span><b>30% do recheio</b></div>
+        <div class="detail-item"><span>🍚 Arroz</span><b>15% do recheio</b></div>
+        <div class="detail-item"><span>🌿 Couve</span><b>60% dos charutos</b></div>
+        <div class="detail-item"><span>🥬 Repolho</span><b>40% dos charutos</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>💾 Backup dos dados</h3></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn soft" data-action="exportar">💾 Exportar (JSON)</button>
+        <button class="btn soft" data-action="importar">📥 Importar</button>
+        <button class="btn danger-soft" data-action="limpar">🗑️ Apagar todos os dados</button>
+        <input type="file" id="arquivo-import" accept="application/json" style="display:none">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>ℹ️ Sobre</h3></div>
+      <div class="detail-grid">
+        <div class="detail-item"><span>Eventos</span><b>${state.eventos.length}</b></div>
+        <div class="detail-item"><span>Insumos no catálogo</span><b>${CATALOGO.length}</b></div>
+        <div class="detail-item"><span>Versão</span><b>${VERSAO}.4</b></div>
+        <div class="detail-item"><span>Armazenamento</span><b>LocalStorage</b></div>
+      </div>
+    </div>`;
+}
+
+/* ---------- Modal de evento ---------- */
+function abrirFormEvento(id){
+  const ev = id ? state.eventos.find(e => e.id === id) : null;
+  const corpo = `
+    <form id="form-ev" novalidate>
+      <div class="grid-2">
+        <div class="field"><label>Nome do evento *</label>
+          <input type="text" id="ev-nome" value="${ev?esc(ev.nome):''}" placeholder="Ex.: Casamento João e Maria" autocomplete="off"></div>
+        <div class="field"><label>Data *</label>
+          <input type="date" id="ev-data" value="${ev?ev.data:hoje()}"></div>
+        <div class="field"><label>Número de pessoas *</label>
+          <input type="text" inputmode="numeric" id="ev-pessoas" value="${ev?ev.pessoas:''}" placeholder="Ex.: 50"></div>
+        <div class="field"><label>Status</label>
+          <select id="ev-status">
+            <option value="planejado" ${!ev||ev.status==='planejado'?'selected':''}>📅 Planejado</option>
+            <option value="realizado" ${ev&&ev.status==='realizado'?'selected':''}>✅ Realizado</option>
+          </select></div>
+      </div>
+      <div class="field"><label>📝 Observações</label>
+        <textarea id="ev-obs" rows="2" placeholder="Ex.: Evento teve muitas crianças...">${ev?esc(ev.observacoes||''):''}</textarea></div>
+      <div class="preview-box" id="ev-preview"></div>
+    </form>`;
+  const rodape = `
+    <button class="btn ghost" data-action="fechar-modal">Cancelar</button>
+    <button class="btn primary" data-action="salvar-evento" data-id="${ev?ev.id:''}">💾 ${ev?'Salvar':'Criar evento'}</button>`;
+  openModal({ titulo: ev?'✏️ Editar evento':'➕ Novo evento', corpo, rodape });
+
+  const atualizar = () => {
+    const p = toNum($('#ev-pessoas').value);
+    const box = $('#ev-preview');
+    if (!box) return;
+    if (p <= 0){
+      box.innerHTML = `<h4>Prévia</h4><p style="margin:0;font-size:13px;color:var(--cinza-500)">Informe o número de pessoas.</p>`;
+      return;
+    }
+    const plano = calcularInsumos(p);
+    const destaque = plano.filter(i => ['carne','paio','arroz','couve','repolho'].includes(i.catId));
+    const charutos = p * toNum(state.params.charutosPorPessoa);
+    const recheio = charutos * toNum(state.params.recheioPorCharuto);
+    box.innerHTML = `<h4>Prévia — ${fmtQtd(p,0)} pessoas</h4>
+      <div class="preview-grid">
+        <div><span>🌯 Charutos</span><b>${fmtQtd(charutos,0)}</b></div>
+        <div><span>⚖️ Recheio</span><b>${fmtQtd(recheio/1000,2)} kg</b></div>
+        ${destaque.map(i => `<div><span>${i.emoji} ${esc(i.nome)}</span><b>${fmtQtd(i.quantidade,2)} ${esc(i.unidade)}</b></div>`).join('')}
+      </div>`;
+  };
+  const pes = $('#ev-pessoas');
+  if (pes){ pes.addEventListener('input', atualizar); pes.addEventListener('change', atualizar); setTimeout(()=>pes.focus(), 80); }
+  atualizar();
+}
+
+function salvarFormEvento(id){
+  const nome = ($('#ev-nome').value||'').trim();
+  const data = $('#ev-data').value;
+  const pessoas = toNum($('#ev-pessoas').value);
+  const status = $('#ev-status').value;
+  const obs = ($('#ev-obs').value||'').trim();
+
+  if (!nome){ toast('Informe o nome do evento.', 'err'); return; }
+  if (!data){ toast('Informe a data.', 'err'); return; }
+  if (pessoas <= 0){ toast('O número de pessoas deve ser maior que zero.', 'err'); return; }
+
+  if (id){
+    const ev = state.eventos.find(e => e.id === id);
+    const temRes = ev && (numOrNull(ev.resultado.produzidos) !== null || numOrNull(ev.resultado.consumidos) !== null);
+    const mudouP = ev && toNum(ev.pessoas) !== pessoas;
+    const exec = () => {
+      atualizarEvento(id, { nome, data, pessoas, status, observacoes: obs });
+      closeModal();
+      toast('Evento atualizado.', 'ok');
+      refresh();
+    };
+    if (temRes && mudouP){
+      confirmar('Este evento já tem resultado real registrado. Alterar o nº de pessoas irá <b>recalcular as quantidades</b>, mas os valores unitários serão preservados.<br><br>Continuar?',
+        { titulo:'⚠️ Confirmar', textoOk:'Continuar' }).then(ok => { if (ok) exec(); });
+    } else exec();
+  } else {
+    criarEvento({ nome, data, pessoas, status, observacoes: obs });
+    closeModal();
+    toast('Evento criado! Preencha os valores unitários na lista de insumos.', 'ok');
+    refresh();
+    setView('insumos');
+  }
+}
+
+/* ---------- Relatório ---------- */
+function gerarRelatorio(id){
+  const ev = state.eventos.find(e => e.id === id);
+  if (!ev){ toast('Evento não encontrado.', 'err'); return; }
+  const m = metricas(ev);
+
+  const linhas = (ev.itens||[]).map(it => `<tr>
+    <td>${esc(it.nome)}</td>
+    <td class="num">${fmtQtd(it.quantidade,3)}</td>
+    <td>${esc(it.unidade)}</td>
+    <td class="num">${it.valorUnitario>0?fmtMoney(it.valorUnitario):'—'}</td>
+    <td class="num">${it.valorUnitario>0?fmtMoney(it.custo):'—'}</td>
+  </tr>`).join('');
+
+  const linhasExtras = (ev.custosExtras||[]).length
+    ? ev.custosExtras.map(c => `<tr><td>${esc(c.descricao)}</td><td class="num">${fmtMoney(c.valor)}</td></tr>`).join('')
+    : '<tr><td colspan="2">Nenhuma.</td></tr>';
+
+  const situacao = m.sobra === null ? 'Resultado não registrado.'
+    : (m.sobra < 0 ? `FALTARAM ${fmtQtd(Math.abs(m.sobra),0)} charutos.`
+       : `Sobraram ${fmtQtd(m.sobra,0)} charutos (${fmtPct(m.sobraPct)}).`);
+
+  $('#print-area').innerHTML = `
+    <div class="pr-head">
+      <div>
+        <h1>🌿 Relatório do Evento</h1>
+        <div><b>${esc(ev.nome)}</b></div>
+      </div>
+      <div style="text-align:right">
+        <div>Data: <b>${fmtData(ev.data)}</b></div>
+        <div>Emitido: ${new Date().toLocaleString('pt-BR')}</div>
+      </div>
+    </div>
+
+    <div class="pr-box">
+      <h2>1. Dados gerais</h2>
+      <div class="pr-grid">
+        <div>Pessoas previstas: <b>${fmtQtd(m.pessoas,0)}</b></div>
+        <div>Pessoas atendidas: <b>${fmtQtd(m.pessoasAtendidas,0)}</b></div>
+        <div>Status: <b>${ev.status}</b></div>
+        <div>Charutos planejados: <b>${fmtQtd(m.planejados,0)}</b></div>
+        <div>Recheio total: <b>${fmtQtd(ev.recheioTotalG/1000,2)} kg</b></div>
+        <div>Recheio/charuto: <b>${fmtQtd(state.params.recheioPorCharuto,0)} g</b></div>
+      </div>
+    </div>
+
+    <div class="pr-box">
+      <h2>2. Resultado real</h2>
+      <div class="pr-grid">
+        <div>Produzidos: <b>${m.produzidos!==null?fmtQtd(m.produzidos,0):'—'}</b></div>
+        <div>Consumidos: <b>${m.consumidos!==null?fmtQtd(m.consumidos,0):'—'}</b></div>
+        <div>Sobra: <b>${m.sobra!==null?fmtQtd(m.sobra,0):'—'}</b></div>
+        <div>% Sobra: <b>${m.sobraPct!==null?fmtPct(m.sobraPct):'—'}</b></div>
+        <div>Consumo/pessoa: <b>${m.consumoPP!==null?fmtQtd(m.consumoPP,2):'—'}</b></div>
+        <div>Situação: <b>${esc(situacao)}</b></div>
+      </div>
+    </div>
+
+    <h2>3. Insumos</h2>
+    <table>
+      <thead><tr><th>Insumo</th><th class="num">Qtd.</th><th>Un.</th><th class="num">Valor unit.</th><th class="num">Custo</th></tr></thead>
+      <tbody>${linhas}</tbody>
+      <tfoot><tr><td colspan="4" class="num"><b>Subtotal insumos</b></td>
+        <td class="num"><b>${fmtMoney(m.custoIngredientes)}</b></td></tr></tfoot>
+    </table>
+
+    <h2>4. Outras despesas</h2>
+    <table>
+      <thead><tr><th>Descrição</th><th class="num">Valor</th></tr></thead>
+      <tbody>${linhasExtras}</tbody>
+      <tfoot><tr><td class="num"><b>Subtotal</b></td><td class="num"><b>${fmtMoney(m.custoExtras)}</b></td></tr></tfoot>
+    </table>
+
+    <div class="pr-box" style="margin-top:5mm">
+      <h2 style="margin-top:0">5. Resumo financeiro</h2>
+      <div class="pr-grid">
+        <div>Insumos: <b>${fmtMoney(m.custoIngredientes)}</b></div>
+        <div>Extras: <b>${fmtMoney(m.custoExtras)}</b></div>
+        <div><b>CUSTO TOTAL: ${fmtMoney(m.custoTotal)}</b></div>
+        <div>Custo/pessoa: <b>${fmtMoney(m.custoPorPessoa)}</b></div>
+        <div>Custo/charuto: <b>${fmtMoney(m.custoPorCharuto)}</b></div>
+      </div>
+    </div>
+
+    ${ev.observacoes ? `<h2>6. Observações</h2><div class="pr-box">${esc(ev.observacoes)}</div>` : ''}
+
+    <p style="margin-top:6mm;font-size:9pt;color:#666;text-align:center">
+      Gerado pelo aplicativo Charutos de Couve.
+    </p>`;
+
+  window.print();
+}
+
+/* ---------- Export / Import / Limpar ---------- */
+function exportar(){
+  try{
+    const payload = { app:'charutos-couve', versao:VERSAO, exportadoEm:new Date().toISOString(), dados:state };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `charutos-backup-${hoje()}.json`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+    toast('Backup exportado.', 'ok');
+  }catch(e){ console.error(e); toast('Falha ao exportar.', 'err'); }
+}
+
+function importar(file){
+  const r = new FileReader();
+  r.onload = async e => {
+    try{
+      const parsed = JSON.parse(e.target.result);
+      const d = parsed && parsed.dados ? parsed.dados : parsed;
+      if (!d || !Array.isArray(d.eventos)){ toast('Arquivo inválido.', 'err'); return; }
+      const ok = await confirmar(
+        `Importar <b>${d.eventos.length} evento(s)</b>?<br><br>Isso <b>substitui todos os dados</b> atuais.`,
+        { titulo:'📥 Importar', textoOk:'Importar' });
+      if (!ok) return;
+      const base = estadoInicial();
+      state = {
+        versao: VERSAO,
+        params: Object.assign({}, base.params, d.params || {}),
+        eventos: (d.eventos||[]).map(normEvento),
+        currentEventId: d.currentEventId || null
+      };
+      state.eventos.forEach(ev => { if (!ev.itens || !ev.itens.length) recalcEvento(ev); });
+      salvar(); renderSeletor(); setView(currentView);
+      toast('Dados importados!', 'ok');
+    }catch(err){ console.error(err); toast('Erro ao ler o arquivo.', 'err'); }
+  };
+  r.onerror = () => toast('Erro ao ler o arquivo.', 'err');
+  r.readAsText(file, 'utf-8');
+}
+
+async function limpar(){
+  const ok1 = await confirmar(
+    'Isso apagará <b>todos os eventos e dados</b> salvos neste navegador.<br><br>Continuar?',
+    { titulo:'🗑️ Apagar tudo', textoOk:'Continuar' });
+  if (!ok1) return;
+  const ok2 = await confirmar(
+    '<b>Última confirmação!</b> Não será possível recuperar os dados.<br><br>Apagar definitivamente?',
+    { titulo:'⚠️ Confirmação final', textoOk:'Apagar' });
+  if (!ok2) return;
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  state = estadoInicial();
+  salvar(); renderSeletor(); setView('dashboard');
+  toast('Dados apagados.', 'ok');
+}
+
+/* ---------- Navegação ---------- */
+const TITULOS = {
+  dashboard:'🏠 Dashboard', eventos:'📅 Eventos', insumos:'🛒 Insumos',
+  comparativos:'📊 Comparativos', config:'⚙️ Configurações'
+};
+let currentView = 'dashboard';
+
+function renderView(v){
+  if (v==='dashboard') renderDashboard();
+  else if (v==='eventos') renderEventos();
+  else if (v==='insumos') renderInsumos();
+  else if (v==='comparativos') renderComparativos();
+  else if (v==='config') renderConfig();
+}
+
+function setView(v){
+  currentView = v;
+  $$('.view').forEach(x => x.classList.toggle('active', x.id === 'view-'+v));
+  $$('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  const t = $('#view-title'); if (t) t.textContent = TITULOS[v] || 'Charutos de Couve';
+  renderView(v);
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function refresh(){ renderSeletor(); renderView(currentView); }
+
+/* ============================================================================
+ * DELEGAÇÃO DE EVENTOS
+ * ==========================================================================*/
+document.addEventListener('click', async e => {
+  const btn = e.target.closest('[data-action]');
+  if (!btn) return;
+  const acao = btn.dataset.action;
+  const id = btn.dataset.id;
+
+  switch(acao){
+    case 'novo-evento': abrirFormEvento(null); break;
+    case 'fechar-modal': closeModal(); break;
+
+    case 'abrir-evento':
+      state.currentEventId = id; salvar(); renderSeletor();
+      setView('insumos'); toast('Evento selecionado.', 'info', 1500); break;
+
+    case 'editar-evento': abrirFormEvento(id); break;
+    case 'salvar-evento': salvarFormEvento(id || ''); break;
+
+    case 'excluir-evento': {
+      const ev = state.eventos.find(e => e.id === id); if (!ev) break;
+      const ok = await confirmar(
+        `Excluir o evento <b>"${esc(ev.nome)}"</b>?<br><br>Não pode ser desfeito.`,
+        { titulo:'🗑️ Excluir', textoOk:'Excluir' });
+      if (ok){ excluirEvento(id); renderSeletor(); renderView(currentView); toast('Evento excluído.', 'ok'); }
+      break;
+    }
+
+    case 'relatorio': gerarRelatorio(id); break;
+    case 'limpar-filtros':
+      filtros.busca=''; filtros.status='todos'; renderEventos(); break;
+
+    case 'restaurar-qtd':
+      restaurarQtd(btn.dataset.evid, btn.dataset.iid);
+      renderInsumos(); toast('Quantidade restaurada.', 'ok', 1500); break;
+
+    case 'add-extra': {
+      const d = ($('#nova-desc').value||'').trim() || 'Despesa';
+      const v = toNum($('#novo-valor').value);
+      if (v <= 0){ toast('Informe um valor maior que zero.', 'err'); break; }
+      addCustoExtra(btn.dataset.evid, d, v);
+      renderInsumos(); toast('Despesa adicionada.', 'ok'); break;
+    }
+    case 'del-extra': {
+      const ok = await confirmar('Excluir esta despesa?', { titulo:'🗑️ Excluir' });
+      if (ok){ delCustoExtra(btn.dataset.evid, btn.dataset.cid); renderInsumos(); toast('Despesa excluída.', 'ok'); }
+      break;
+    }
+
+    case 'comp-todos':
+      state.eventos.forEach(ev => selecionados.add(ev.id)); renderComparativos(); break;
+    case 'comp-limpar':
+      selecionados.clear(); renderComparativos(); break;
+
+    case 'salvar-config': {
+      const cpp = toNum($('#cfg-cpp').value);
+      const rpc = toNum($('#cfg-rpc').value);
+      const rc = toNum($('#cfg-rend-couve').value);
+      const rr = toNum($('#cfg-rend-repolho').value);
+      if (cpp<=0 || rpc<=0 || rc<=0 || rr<=0){ toast('Todos os valores devem ser maiores que zero.', 'err'); break; }
+      const mudou = cpp !== toNum(state.params.charutosPorPessoa)
+                 || rpc !== toNum(state.params.recheioPorCharuto)
+                 || rc !== toNum(state.params.rendimentoCouve)
+                 || rr !== toNum(state.params.rendimentoRepolho);
+      if (mudou){
+        const ok = await confirmar(
+          'Você está alterando parâmetros da receita.<br><br>Eventos já salvos <b>não serão recalculados automaticamente</b>.<br><br>Salvar?',
+          { titulo:'⚙️ Confirmar', textoOk:'Salvar', perigo:false });
+        if (!ok) break;
+      }
+      state.params.charutosPorPessoa = cpp;
+      state.params.recheioPorCharuto = rpc;
+      state.params.rendimentoCouve = rc;
+      state.params.rendimentoRepolho = rr;
+      salvar(); toast('Parâmetros salvos.', 'ok'); renderConfig(); break;
+    }
+
+    case 'exportar': exportar(); break;
+    case 'importar': $('#arquivo-import').click(); break;
+    case 'limpar': limpar(); break;
+  }
+});
+
+document.addEventListener('click', e => {
+  if (e.target.dataset && e.target.dataset.backdrop) closeModal();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){
+    if ($('#confirm-root').classList.contains('open')) return;
+    if ($('#modal-root').classList.contains('open')) closeModal();
+  }
+});
+
+document.addEventListener('click', e => {
+  const nav = e.target.closest('.nav-item');
+  if (nav && nav.dataset.view) setView(nav.dataset.view);
+});
+
+document.addEventListener('change', e => {
+  if (e.target && e.target.id === 'seletor-evento'){
+    state.currentEventId = e.target.value || null;
+    salvar(); renderView(currentView);
+  }
+});
+
+/* ============================================================================
+ * INPUTS — atualização total a cada tecla
+ * ==========================================================================*/
+document.addEventListener('input', e => {
+  const t = e.target; if (!t || !t.dataset) return;
+
+  if (t.id === 'f-busca'){ filtros.busca = t.value; renderEventos(); refoca('f-busca'); }
+  if (t.id === 'f-status'){ filtros.status = t.value; renderEventos(); }
+
+  if (t.dataset.role === 'qtd-item'){
+    atualizarItem(t.dataset.evid, t.dataset.iid, 'quantidade', t.value);
+    atualizaTodasCelulasCusto(t.dataset.evid);
+    atualizaTotais(t.dataset.evid);
+    atualizaBotaoRestaurar(t);
+  }
+  if (t.dataset.role === 'valor-item'){
+    atualizarItem(t.dataset.evid, t.dataset.iid, 'valorUnitario', t.value);
+    atualizaTodasCelulasCusto(t.dataset.evid);
+    atualizaTotais(t.dataset.evid);
+  }
+  if (t.dataset.role === 'resultado'){
+    updResultado(t.dataset.evid, t.dataset.campo, t.value);
+    atualizaAnaliseResultado(t.dataset.evid);
+  }
+  if (t.dataset.role === 'extra-desc'){
+    updCustoExtra(t.dataset.evid, t.dataset.cid, 'descricao', t.value);
+  }
+  if (t.dataset.role === 'extra-valor'){
+    updCustoExtra(t.dataset.evid, t.dataset.cid, 'valor', t.value);
+    atualizaTotais(t.dataset.evid);
+  }
+});
+
+/* Sem reformatação no change — mantém o texto exato que o usuário digitou */
+document.addEventListener('change', e => {
+  const t = e.target; if (!t || !t.dataset) return;
+
+  /* Recalcula tudo (garantia extra) */
+  if (t.dataset.role === 'qtd-item' || t.dataset.role === 'valor-item'){
+    atualizaTodasCelulasCusto(t.dataset.evid);
+    atualizaTotais(t.dataset.evid);
+  }
+  if (t.dataset.role === 'extra-valor'){
+    atualizaTotais(t.dataset.evid);
+  }
+
+  if (t.dataset.role === 'chk'){
+    if (t.checked) selecionados.add(t.value); else selecionados.delete(t.value);
+    renderComparativos();
+  }
+
+  if (t.id === 'arquivo-import' && t.files && t.files[0]){ importar(t.files[0]); t.value=''; }
+});
+
+/** Varre TODAS as células de custo da tabela e atualiza o conteúdo. */
+function atualizaTodasCelulasCusto(evId){
+  const ev = state.eventos.find(e => e.id === evId); if (!ev) return;
+  document.querySelectorAll('#view-insumos .custo-cell').forEach(cell => {
+    const slotId = cell.getAttribute('data-slot');
+    const item = (ev.itens||[]).find(i => i.id === slotId);
+    if (item){
+      cell.innerHTML = `<b>${toNum(item.valorUnitario) > 0 ? fmtMoney(item.custo) : '—'}</b>`;
+    }
+  });
+}
+
+/** Recalcula e atualiza TODOS os totais exibidos (rodapé + resumo + dashboard-like). */
+function atualizaTotais(evId){
+  const ev = state.eventos.find(e => e.id === evId); if (!ev) return;
+
+  /* Recálculo direto do estado (independente de metricas) para garantir */
+  let custoIng = 0;
+  (ev.itens||[]).forEach(i => {
+    const c = Number(i.custo);
+    if (Number.isFinite(c)) custoIng += c;
+  });
+  let custoExt = 0;
+  (ev.custosExtras||[]).forEach(c => {
+    const v = Number(c.valor);
+    if (Number.isFinite(v)) custoExt += v;
+  });
+  const custoTotal = custoIng + custoExt;
+  const pessoas = toNum(ev.pessoas);
+  const planejados = toNum(ev.charutosPlanejados);
+  const custoPorPessoa = pessoas > 0 ? custoTotal / pessoas : 0;
+  const custoPorCharuto = planejados > 0 ? custoTotal / planejados : 0;
+
+  const totalIns = document.getElementById('total-insumos');
+  if (totalIns) totalIns.textContent = fmtMoney(custoIng);
+  const totalExt = document.getElementById('total-extras');
+  if (totalExt) totalExt.textContent = fmtMoney(custoExt);
+  const tbIns = document.getElementById('tb-insumos');
+  if (tbIns) tbIns.textContent = fmtMoney(custoIng);
+  const tbExt = document.getElementById('tb-extras');
+  if (tbExt) tbExt.textContent = fmtMoney(custoExt);
+  const tbTot = document.getElementById('tb-total');
+  if (tbTot) tbTot.textContent = fmtMoney(custoTotal);
+  const tbPes = document.getElementById('tb-pessoa');
+  if (tbPes) tbPes.textContent = fmtMoney(custoPorPessoa);
+  const tbCha = document.getElementById('tb-charuto');
+  if (tbCha) tbCha.textContent = fmtMoney(custoPorCharuto);
+}
+
+function atualizaAnaliseResultado(evId){
+  const ev = state.eventos.find(e => e.id === evId); if (!ev) return;
+  const m = metricas(ev);
+  const box = document.querySelector('#view-insumos .preview-grid');
+  if (box){
+    box.innerHTML = `
+      <div><span>Planejado</span><b>${fmtQtd(m.planejados,0)}</b></div>
+      <div><span>Produzido</span><b>${m.produzidos!==null?fmtQtd(m.produzidos,0):'—'}</b></div>
+      <div><span>Consumido</span><b>${m.consumidos!==null?fmtQtd(m.consumidos,0):'—'}</b></div>
+      <div><span>Sobra</span><b>${m.sobra!==null?fmtQtd(m.sobra,0):'—'}</b></div>
+      <div><span>% Sobra</span><b>${m.sobraPct!==null?fmtPct(m.sobraPct):'—'}</b></div>
+      <div><span>Consumo/pessoa</span><b>${m.consumoPP!==null?fmtQtd(m.consumoPP,2):'—'}</b></div>`;
+  }
+  const inputs = document.querySelectorAll('#view-insumos input[disabled]');
+  if (inputs.length){
+    inputs[0].value = m.sobra!==null ? fmtQtd(m.sobra,0)+' charutos' : '—';
+  }
+}
+
+function atualizaBotaoRestaurar(input){
+  const slot = document.querySelector(`.btn-restaurar[data-slot="${input.dataset.iid}"]`);
+  if (!slot) return;
+  const jaTem = slot.querySelector('[data-action="restaurar-qtd"]');
+  if (!jaTem){
+    slot.innerHTML = `<button class="icon-btn" title="Restaurar cálculo automático"
+      data-action="restaurar-qtd" data-evid="${input.dataset.evid}" data-iid="${input.dataset.iid}">↩️</button>`;
+  }
+}
+
+function refoca(id){
+  const el = document.getElementById(id);
+  if (el && el.type === 'search'){
+    el.focus();
+    const v = el.value; el.setSelectionRange(v.length, v.length);
+  }
+}
+
+let rTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(rTimer);
+  rTimer = setTimeout(() => {
+    if (currentView === 'comparativos') renderComparativos();
+  }, 220);
+});
+
+/* ---------- Inicialização ---------- */
+function init(){
+  try{
+    state = carregar();
+  }catch(err){
+    console.error('Erro ao carregar estado, iniciando vazio:', err);
+    state = estadoInicial();
+  }
+  try{
+    if (state.eventos.length){
+      if (!state.eventos.some(e => e.id === state.currentEventId))
+        state.currentEventId = state.eventos[0].id;
+    } else state.currentEventId = null;
+    renderSeletor();
+    setView('dashboard');
+    console.log('%c🌿 Charutos de Couve — pronto (v3.4).', 'color:#27a355;font-weight:bold');
+  }catch(err){
+    console.error('Erro ao renderizar:', err);
+    document.body.insertAdjacentHTML('afterbegin',
+      `<div class="alert err" style="margin:14px"><span class="ai">🔴</span>
+        <span>Erro ao iniciar. Verifique o console do navegador.</span></div>`);
+  }
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+else init();
+</script>
+</body>
+</html>
